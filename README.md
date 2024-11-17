@@ -1,4 +1,4 @@
-# Traffic-Light-Controller-Using-Verilog-HDL
+## Exp No:4 Traffic-Light-Controller-Using-Verilog-HDL
 ## Aim
 To design and simulate a traffic light controller using Verilog HDL, and verify its functionality through a testbench in the Vivado 2023.1 simulation environment. The objective is to control the traffic lights for a junction with a specific time-based sequence for Red, Yellow, and Green lights.
 
@@ -66,8 +66,36 @@ else
  end
  endmodule
 ```
+## Testbench for Traffic Light Controller:
+```
+module normal_traffic_tb;
+    reg clk, rst;
+    wire [2:0] light;
 
- OUTPUT:![Screenshot 2024-10-16 164023](https://github.com/user-attachments/assets/003f6ace-235c-47b7-9532-ef38a4b8935c)
+    normal_traffic uut (
+        .clk(clk),
+        .rst(rst),
+        .light(light)
+    );
+
+    initial begin
+        clk = 0;
+        rst = 1;
+        #10 rst = 0;
+    end
+
+    always #10 clk = ~clk;
+
+    initial begin
+        $monitor("Time = %d, rst = %b, light = %b", $time, rst, light);
+        #200 $finish;
+    end
+endmodule
+```
+
+
+ OUTPUT:![376997906-ef34bfce-fab3-4dc4-b05b-b5563a1f6373](https://github.com/user-attachments/assets/f126cb5d-45b1-407d-82e5-60c9453818a4)
+
 
 
 
